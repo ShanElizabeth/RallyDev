@@ -1,36 +1,40 @@
 Ext.define('CustomApp', {
     extend: 'Rally.app.App',
     componentCls: 'app',
-
     launch: function() {
-    	console.log('Testing App');
-    	this.loadData(); //goes out to app and calls higher up 
+        //Write app code here
+        	console.log("Running app");
+        	this.loadData();
+
     },
 
-    //get data from rally
     loadData: function (){
     	 var myStore = Ext.create('Rally.data.wsapi.Store', {
         	//configuration object 
         	//pull user story out of rally
 
-	   		 model: 'User Story',
+	   		 model: 'Defect',
+	   		 sorters:[{
+	   		 		property:'FormattedID',
+	   		 		direction:'DESC',
+	   		 }],
 	   		 autoLoad: true,
 	  	 	 listeners: {
 	      		  load: function(store, data, success) {
 	    	        //process data
-	    	        console.log('get data',store,data,success);
+
+	    	        
 	    	        this.loadGrid(myStore);
 	    	     }, 
 	    	    scope:this
 	   		 },
-	   	 fetch: ['FormattedID','Name', 'ScheduleState']
+	   	 fetch: ['FormattedID','Name', 'ScheduleState','Owner','ScheduleState','Severity']
 	   	 // to fetch data out of rally, pulling this from wsapi docs pulling this info from rally 
 
 		});
     },
-    //creaate grid and show given stories
-    loadGrid:function loadGrid(myStoryStore) {
-    	// body...
+
+    loadGrid: function(myStore){
     	 Ext.create('Rally.data.wsapi.TreeStoreBuilder').build({
 		     models: ['userstory'],
 		     autoLoad: true,
@@ -50,6 +54,9 @@ Ext.define('CustomApp', {
 		         });
 		     }
 		 });
-    	 
+		    	
+       },
+
+
     
- 	}
+});

@@ -1,4 +1,5 @@
 .app {
      /* Add app styles here */
-   background-color: gray;
+     border: 10px solid green;
+
 }
