@@ -1,11 +1,10 @@
-// Custom Rally App that displays Defects in a grid and filter by Iteration and/or Severity.
-//
-// Note: various console debugging messages intentionally kept in the code for learning purposes
-
 Ext.define('CustomApp', {
     extend: 'Rally.app.App',      // The parent class manages the app 'lifecycle' and calls launch() when ready
     componentCls: 'app',          // CSS styles found in app.css
-
+    items:[{
+        xtype:'container',
+        itemId:'exportBtn'
+    }],
 
     defectStore: undefined,       // app level references to the store and grid for easy access in various methods
     defectGrid: undefined,
@@ -14,7 +13,7 @@ Ext.define('CustomApp', {
     launch: function() {
 
       console.log('our second app');     // see console api: https://developers.google.com/chrome-developer-tools/docs/console-api
-
+      this.displayBtn();
       this.pulldownContainer = Ext.create('Ext.container.Container', {    // this container lets us control the layout of the pulldowns; they'll be added below
         id: 'pulldown-container-id',
         layout: {
@@ -27,7 +26,20 @@ Ext.define('CustomApp', {
 
       this._loadIterations();
     },
-
+    //dispay button
+    displayBtn:function(){
+        console.log("display");
+        this.down('#exportBtn').add({
+            xtype:'rallybutton',
+            text:'EXPORT TO CSV',
+            handler:this.onlick,
+            scope:this
+        });
+    },
+    //what to do when button is clicked
+    onlick:function(){
+        console.log("working")
+    },
     // create iteration pulldown and load iterations
     _loadIterations: function() {
         this.iterComboBox = Ext.create('Rally.ui.combobox.IterationComboBox', {

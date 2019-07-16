@@ -1,9 +1,25 @@
 Ext.define('CustomApp', {
     extend: 'Rally.app.App',
     componentCls: 'app',
+    items:[{
+        xtype:'container',
+        itemId:'exportBtn'
+    }],
     launch: function() {
-        //Write app code here
-
-        //API Docs: https://help.rallydev.com/apps/2.1/doc/
+        console.log("Launch");
+       this.displayBtn();
+    },
+    displayBtn:function(){
+        console.log("display");
+        this.down('#exportBtn').add({
+            xtype:'rallybutton',
+            text:'EXPORT TO CSV',
+            handler:this.onlick,
+            scope:this
+        });
+    },
+    onlick:function(){
+        console.log("working")
     }
 });
+

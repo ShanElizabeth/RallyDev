@@ -31,25 +31,16 @@ Ext.define('CustomApp', {
     //creaate grid and show given stories
     loadGrid:function loadGrid(myStoryStore) {
     	// body...
-    	 Ext.create('Rally.data.wsapi.TreeStoreBuilder').build({
-		     models: ['userstory'],
-		     autoLoad: true,
-		     enableHierarchy: true
-		  }).then({
-		      success: function(store) {
-		         Ext.create('Ext.Container', {
-		             items: [{
-		                 xtype: 'rallytreegrid',
-		                 columnCfgs: [
-		                     'Name',
-		                     'Owner'
-		                 ],
-		                 store: store
-		             }],
-		             renderTo: Ext.getBody()
-		         });
-		     }
-		 });
-    	 
-    
- 	}
+    	 var myGrid= Ext.create('Rally.ui.grid.Grid',{
+	    	        	store: myStoryStore,
+	    	        	columnCfgs:[//columns in main app id name and schedule state all interactive 
+
+	    	        	'FormattedID','Name',
+	    	        	'ScheduleState'
+	    	        	]
+	    	        });
+	    	       this.add(myGrid); //add it to the app
+	    	       console.log("What is this", this);
+	    	    
+    }
+    });
