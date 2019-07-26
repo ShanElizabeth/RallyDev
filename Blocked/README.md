@@ -4,6 +4,7 @@ blocked
 ## Overview
 
 
+![alt text](https://github.com/ShanElizabeth/RallyDev/blob/master/Blocked/grid%20view.PNG)
 ## License
 
 blocked is released under the MIT license.  See the file [LICENSE](./LICENSE) for the full text.
